@@ -53,8 +53,8 @@ class VideoToNotes:
             return f"Error transcribing audio: {str(e)}"
 
 # Initialize the video to notes processor
-if 'video_processor' not in st.session_state:
-    st.session_state.video_processor = VideoToNotes()
+if 'audio_processor' not in st.session_state:
+    st.session_state.audio_processor = VideoToNotes()
 
 # Sidebar for file upload
 with st.sidebar:
@@ -107,7 +107,7 @@ with col2:
         # Transcribe button
         if st.button("🎙️ Transcribe Audio", type="primary"):
             with st.spinner("Transcribing audio..."):
-                transcript = st.session_state.video_processor.transcribe_audio(temp_file_path)
+                transcript = st.session_state.audio_processor.transcribe_audio(temp_file_path)
                 
                 if transcript.startswith("Error"):
                     st.error(transcript)

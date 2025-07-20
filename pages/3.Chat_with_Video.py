@@ -93,8 +93,8 @@ def reset_chat():
         except:
             pass
         del st.session_state.video_file 
-    if 'video_processor' in st.session_state:
-        del st.session_state.video_processor
+    if 'gemini_video_processor' in st.session_state:
+        del st.session_state.gemini_video_processor
     if 'video_name' in st.session_state:
         del st.session_state.video_name
     
@@ -112,8 +112,8 @@ if "messages" not in st.session_state:
 if "video_file" not in st.session_state:
     st.session_state.video_file = None
 
-if "video_processor" not in st.session_state:
-    st.session_state.video_processor = None
+if "gemini_video_processor" not in st.session_state:
+    st.session_state.gemini_video_processor = None
 
 if "video_name" not in st.session_state:
     st.session_state.video_name = None 
@@ -126,11 +126,12 @@ with st.sidebar:
 
     default_api_key = os.getenv("GEMINI_API_KEY")
 
-    api_key = st.text_input("GEMINI API Key", value=default_api_key, type="password", help="Get your API key from https://aistudio.google.com/app/apikey")
-
+    api_key = default_api_key
+    #api_key = st.text_input("GEMINI API Key", value=default_api_key, type="password", help="Get your API key from https://aistudio.google.com/app/apikey")
+ 
     if api_key:
-        if st.session_state.video_processor is None: 
-            st.session_state.video_processor = VideoProcessor(api_key)
+        if st.session_state.gemini_video_processor is None: 
+            st.session_state.gemini_video_processor = VideoProcessor(api_key)
         
     st.markdown("---")
     
@@ -156,7 +157,7 @@ with st.sidebar:
             if (st.session_state.video_file is None or 
                 st.session_state.video_name != uploaded_file.name):
                 
-                if st.session_state.video_processor is None:
+                if st.session_state.gemini_video_processor is None:
                     st.error("Please enter your Gemini API key:")
                 else:
                     with st.spinner("Uploading and processing video..."):
@@ -165,13 +166,13 @@ with st.sidebar:
                             tmp_file_path = tmp_file.name
 
                         try:
-                            video_file = st.session_state.video_processor.upload_video(
+                            video_file = st.session_state.gemini_video_processor.upload_video(
                                 tmp_file_path,
                                 uploaded_file.name
                             )
 
                             if video_file:
-                                processed_file = st.session_state.video_processor.wait_for_file_processing(video_file)
+                                processed_file = st.session_state.gemini_video_processor.wait_for_file_processing(video_file)
 
                                 if processed_file:
                                     st.session_state.video_file = processed_file
@@ -226,7 +227,7 @@ else:
     if len(st.session_state.messages) == 0:
         st.markdown("### Try these example questions:")
         example_prompts = [
-            "What is happening in this video?",
+            "Describe the video in detail",
             "Summarize the main events",
             "Describe the people and objects you see",
             "What is the setting or environment?",
@@ -252,7 +253,7 @@ else:
             message_placeholder = st.empty()
 
             with st.spinner("Analyzing video and generating response..."):
-                response = st.session_state.video_processor.chat_with_video(
+                response = st.session_state.gemini_video_processor.chat_with_video(
                     st.session_state.video_file, 
                     prompt
                 )
@@ -275,9 +276,3 @@ else:
 #   Footer
 # ===========================
 st.markdown("---")
-st.markdown("""
-<div style='text-align: center; color: #666;'>
-    <p>Built with ❤️ using Gemini API and Streamlit | 
-    <a href='https://ai.google.dev/gemini-api/docs/video-understanding' target='_blank'>Learn more about Gemini Video API</a></p>
-</div>
-""", unsafe_allow_html=True)
