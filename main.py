@@ -3,8 +3,9 @@ import streamlit as st
 import os
 from dotenv import load_dotenv
 
-st.set_page_config(page_title="Chatbot", page_icon="🎙️")
-st.title("Chatbot")
+st.set_page_config(page_title="Chardikala AI Platform", page_icon="🎙️", layout="wide")
+st.title("🎙️ Chardikala AI Platform")
+st.markdown("---")
 
 load_dotenv()
 
@@ -36,6 +37,27 @@ class Chatbot:
         except Exception as e:
             return f"Error: {str(e)}"
 
+# Welcome section
+st.header("Welcome to Chardikala AI Platform! 🤖")
+st.markdown("""
+This platform offers multiple AI-powered features:
+
+### 🗣️ **Text Chatbot**
+- Have conversations with our friendly AI assistant
+- Get help, ask questions, or just chat!
+
+### 🎥 **Video Chat Platform** (Coming Soon!)
+- Upload videos and chat with them
+- Get insights and analysis from your video content
+- Ask questions about what's happening in the video
+
+---
+""")
+
+# Quick chat interface on homepage
+st.subheader("💬 Quick Chat")
+st.markdown("Try our chatbot right here on the homepage:")
+
 if 'chatbot' not in st.session_state:
     st.session_state.chatbot = Chatbot()
 
@@ -46,7 +68,7 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-if prompt := st.chat_input("What would you like to know?"):
+if prompt := st.chat_input("Ask me anything..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
 
     with st.chat_message("user"):
@@ -57,5 +79,15 @@ if prompt := st.chat_input("What would you like to know?"):
         st.markdown(response)
 
     st.session_state.messages.append({"role": "assistant", "content": response})
+
+# Navigation info
+st.markdown("---")
+st.markdown("""
+### 📱 Navigation
+Use the sidebar to navigate between different features:
+- **🏠 Home** - This page
+- **🗣️ Chatbot** - Full chatbot interface
+- **🎥 Video Chat** - Upload and chat with videos (coming soon!)
+""")
             
         
