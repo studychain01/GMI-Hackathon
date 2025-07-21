@@ -45,11 +45,25 @@ This platform offers multiple AI-powered features:
 ### 🗣️ **Text Chatbot**
 - Have conversations with our friendly AI assistant
 - Get help, ask questions, or just chat!
+- Full conversation history and chat interface
 
-### 🎥 **Video Chat Platform** (Coming Soon!)
-- Upload videos and chat with them
-- Get insights and analysis from your video content
+### 🎥 **Video Chat with Gemini**
+- Upload videos and chat with them using Google's Gemini AI
+- Get visual analysis and insights from your video content
 - Ask questions about what's happening in the video
+- Real-time video processing and analysis
+
+### 📝 **Audio Transcription**
+- Upload video/audio files and convert them to text
+- Get accurate transcriptions using Google Speech-to-Text
+- Perfect for meeting notes, lectures, and interviews
+- Support for multiple audio/video formats
+
+### 🎙️ **Notes to Podcast**
+- Upload PDF or TXT documents and convert them to podcasts
+- Choose from multiple voices and speaking speeds
+- Generate high-quality MP3 audio using Google Cloud TTS
+- Instant audio preview and download
 
 ---
 """)
@@ -85,9 +99,11 @@ st.markdown("---")
 st.markdown("""
 ### 📱 Navigation
 Use the sidebar to navigate between different features:
-- **🏠 Home** - This page
-- **🗣️ Chatbot** - Full chatbot interface
-- **🎥 Video Chat** - Upload and chat with videos (coming soon!)
+- **🏠 Home** - This page with quick chat and platform overview
+- **🗣️ Chatbot** - Full chatbot interface with conversation history and settings
+- **📝 Audio Transcription** - Convert video/audio files to text transcripts using Google Speech-to-Text
+- **🎥 Video Chat** - Upload videos and chat with them using Google's Gemini AI for visual analysis
+- **🎙️ Notes to Podcast** - Convert PDF/TXT documents to podcasts with voice synthesis and download
 """)
             
         
