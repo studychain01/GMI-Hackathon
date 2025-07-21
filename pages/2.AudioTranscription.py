@@ -6,7 +6,7 @@ import os
 import tempfile
 
 st.set_page_config(page_title="Video to Notes", page_icon="🎥", layout="wide")
-st.title("🎥 Video to Notes")
+st.title("🎥 Audio to Notes")
 st.markdown("---")
 
 load_dotenv()
